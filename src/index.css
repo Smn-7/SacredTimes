@@ -16,6 +16,12 @@
   box-sizing: border-box;
 }
 
+/* FIX: Prevent horizontal scrolling/cut-off content */
+body, html {
+  overflow-x: hidden; 
+  width: 100%;
+}
+
 body {
   background-color: var(--bg-color);
   color: var(--text-dark);
@@ -56,7 +62,7 @@ header {
 }
 
 .logo a {
-  font-family: 'Cinzel', serif; /* Elegant font for Logo */
+  font-family: 'Cinzel', serif;
   font-size: 1.8rem;
   color: var(--accent);
   font-weight: bold;
@@ -117,7 +123,7 @@ header {
   max-height: 500px;
   object-fit: cover;
   border-radius: 20px;
-  box-shadow: 20px 20px 0px rgba(26, 35, 126, 0.05); /* Offset shadow matching primary color */
+  box-shadow: 20px 20px 0px rgba(26, 35, 126, 0.05);
 }
 
 /* --- 4. BUTTONS --- */
@@ -144,10 +150,9 @@ header {
   box-shadow: 0 10px 20px rgba(0,0,0,0.15);
 }
 
-/* Outline Button for Shop Sections */
 .btn-outline {
   padding: 12px 35px;
-  border: 2px solid; /* Color comes from inline style */
+  border: 2px solid;
   border-radius: 30px;
   font-weight: 600;
   background: transparent;
@@ -155,7 +160,7 @@ header {
 }
 
 .btn-outline:hover {
-  background: #333; /* Fallback */
+  background: #333;
   color: #fff !important;
   border-color: transparent !important;
 }
@@ -174,17 +179,16 @@ header {
   color: var(--primary);
 }
 
-/* Story Section specific */
 .story-section {
   padding: 4rem 10%;
   background-color: var(--bg-color);
 }
 
-/* --- 6. ALTERNATING FAITH SECTIONS (ZIG-ZAG) --- */
+/* --- 6. FAITH SECTIONS (ZIG-ZAG) --- */
 .faith-list {
   display: flex;
   flex-direction: column;
-  gap: 5rem; /* Space between different religions */
+  gap: 5rem;
   padding: 2rem 5% 6rem 5%;
   max-width: 1300px;
   margin: 0 auto;
@@ -196,7 +200,7 @@ header {
   background: #fff;
   border-radius: 24px;
   overflow: hidden;
-  box-shadow: 0 15px 50px rgba(0,0,0,0.06); /* Soft premium shadow */
+  box-shadow: 0 15px 50px rgba(0,0,0,0.06);
   min-height: 500px;
   transition: transform 0.4s ease;
 }
@@ -205,12 +209,10 @@ header {
   transform: translateY(-8px);
 }
 
-/* This class flips the layout for alternating items */
 .reverse-layout {
   flex-direction: row-reverse;
 }
 
-/* Image Half */
 .faith-image-container {
   flex: 1;
   height: 500px;
@@ -225,12 +227,10 @@ header {
   transition: transform 0.8s ease;
 }
 
-/* Zoom effect on hover */
 .faith-section:hover .faith-image-container img {
   transform: scale(1.08);
 }
 
-/* Content Half */
 .faith-content {
   flex: 1;
   padding: 4rem;
@@ -248,7 +248,7 @@ header {
   margin-bottom: 1rem;
   display: inline-block;
   padding-bottom: 5px;
-  border-bottom: 2px solid; /* Color inherited from inline style */
+  border-bottom: 2px solid;
 }
 
 .faith-content h3 {
@@ -292,74 +292,16 @@ footer {
   opacity: 0.6;
 }
 
-/* --- 8. RESPONSIVE MEDIA QUERIES --- */
-@media (max-width: 900px) {
-  /* Header Stack */
-  header {
-    flex-direction: column;
-    gap: 1rem;
-  }
-  
-  /* Hero Stack */
-  .hero {
-    flex-direction: column;
-    text-align: center;
-    padding: 10% 5%;
-  }
-  
-  .hero-text {
-    padding: 0;
-    margin-bottom: 2rem;
-  }
+/* --- 8. PRODUCT & MALL STYLES --- */
+.products-section { padding: 4rem 1.5rem; }
 
-  .hero-text h1 {
-    font-size: 2.5rem;
-  }
-
-  .hero-img img {
-    height: 300px;
-  }
-
-  /* Faith Sections Stack */
-  .faith-section {
-    flex-direction: column !important; /* Force vertical stack */
-    height: auto;
-    min-height: auto;
-    text-align: center;
-  }
-
-  .faith-image-container {
-    width: 100%;
-    height: 250px; /* Shorter image on mobile */
-  }
-
-  .faith-content {
-    width: 100%;
-    padding: 2.5rem 1.5rem;
-    align-items: center; /* Center buttons and text */
-  }
-
-  .faith-desc {
-    max-width: 100%;
-  }
-}
-
-/* --- PRODUCT PAGE STYLES --- */
-
-.products-section {
-  padding: 4rem 1.5rem;
-}
-
-/* Responsive Grid for Products */
 .product-grid {
   display: grid;
-  /* Auto-fit columns: min 280px wide. This makes it responsive automatically */
   grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
   gap: 2.5rem;
   margin-top: 2rem;
 }
 
-/* Product Card Design */
 .product-card {
   background: white;
   border-radius: 12px;
@@ -377,7 +319,7 @@ footer {
 }
 
 .product-img-wrapper {
-  height: 300px; /* Taller images for products */
+  height: 300px;
   width: 100%;
   position: relative;
   overflow: hidden;
@@ -395,10 +337,8 @@ footer {
   transform: scale(1.05);
 }
 
-.product-badge {
+.product-badge, .discount-badge, .new-badge {
   position: absolute;
-  top: 15px;
-  left: 15px;
   color: white;
   padding: 4px 12px;
   font-size: 0.75rem;
@@ -406,6 +346,9 @@ footer {
   border-radius: 20px;
   text-transform: uppercase;
 }
+.product-badge { top: 15px; left: 15px; }
+.discount-badge { top: 10px; left: 10px; background: #d32f2f; border-radius: 4px; }
+.new-badge { top: 10px; right: 10px; background: #1A237E; border-radius: 4px; }
 
 .product-content {
   padding: 1.5rem;
@@ -414,33 +357,13 @@ footer {
   flex-grow: 1;
 }
 
-.product-info {
-  margin-bottom: 0.5rem;
-}
+.product-info { margin-bottom: 0.5rem; }
+.product-info h3 { font-size: 1.2rem; font-family: 'Playfair Display', serif; color: #222; margin-bottom: 0.2rem;}
+.price { font-weight: 700; font-size: 1.1rem; color: #444; }
+.product-desc { font-size: 0.85rem; color: #888; margin-bottom: 1.5rem; line-height: 1.4; }
 
-.product-info h3 {
-  font-size: 1.2rem;
-  font-family: 'Playfair Display', serif;
-  margin-bottom: 0.2rem;
-  color: #222;
-}
-
-.price {
-  font-weight: 700;
-  font-size: 1.1rem;
-  color: #444;
-}
-
-.product-desc {
-  font-size: 0.85rem;
-  color: #888;
-  margin-bottom: 1.5rem;
-  line-height: 1.4;
-}
-
-/* Add to Cart Button */
 .btn-add-cart {
-  margin-top: auto; /* Pushes button to bottom */
+  margin-top: auto;
   width: 100%;
   padding: 12px;
   border: none;
@@ -450,156 +373,80 @@ footer {
   cursor: pointer;
   transition: opacity 0.2s;
 }
+.btn-add-cart:hover { opacity: 0.9; }
 
-.btn-add-cart:hover {
-  opacity: 0.9;
-}
-
-/* --- FACT SECTION --- */
-.fact-section {
-  color: #fff;
-  padding: 5rem 1.5rem;
-  text-align: center;
-  margin-top: 4rem;
-}
-
-.fact-section h2 {
-  font-size: 2.5rem;
-  margin-bottom: 2rem;
-  font-family: 'Cinzel', serif;
-}
-
+.fact-section { color: #fff; padding: 5rem 1.5rem; text-align: center; margin-top: 4rem; }
+.fact-section h2 { font-size: 2.5rem; margin-bottom: 2rem; font-family: 'Cinzel', serif; }
 .fact-box {
-  max-width: 800px;
-  margin: 0 auto;
-  border: 2px solid rgba(255,255,255,0.3);
-  padding: 2rem;
-  border-radius: 12px;
-  background: rgba(0,0,0,0.1);
+  max-width: 800px; margin: 0 auto; border: 2px solid rgba(255,255,255,0.3);
+  padding: 2rem; border-radius: 12px; background: rgba(0,0,0,0.1);
 }
+.fact-box p { font-size: 1.3rem; line-height: 1.6; font-style: italic; font-family: 'Playfair Display', serif; }
 
-.fact-box p {
-  font-size: 1.3rem;
-  line-height: 1.6;
-  font-style: italic;
-  font-family: 'Playfair Display', serif;
-}
-
-/* --- RESPONSIVE ADJUSTMENTS --- */
-@media (max-width: 768px) {
-  .product-grid {
-    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); /* Smaller cards on mobile */
-    gap: 1.5rem;
-  }
-  
-  .fact-section {
-    padding: 3rem 1.5rem;
-  }
-
-  .fact-section h2 {
-    font-size: 2rem;
-  }
-
-  .fact-box p {
-    font-size: 1.1rem;
-  }
-}
-
-/* --- MALL LAYOUT --- */
-.mall-layout {
-  display: flex;
-  gap: 3rem;
-  align-items: flex-start;
-}
-
-/* Sidebar */
+.mall-layout { display: flex; gap: 3rem; align-items: flex-start; }
 .filters-sidebar {
-  width: 250px;
-  background: #fff;
-  padding: 2rem;
-  border-radius: 12px;
-  box-shadow: 0 5px 20px rgba(0,0,0,0.05);
-  border: 1px solid #eee;
-  flex-shrink: 0; /* Prevents squishing */
+  width: 250px; background: #fff; padding: 2rem; border-radius: 12px;
+  box-shadow: 0 5px 20px rgba(0,0,0,0.05); border: 1px solid #eee; flex-shrink: 0;
 }
+.filters-sidebar h3 { font-family: 'Cinzel', serif; border-bottom: 2px solid #eee; padding-bottom: 0.5rem; margin-bottom: 1.5rem; }
+.filter-group { margin-bottom: 2rem; }
+.filter-group h4 { margin-bottom: 0.8rem; font-size: 0.95rem; text-transform: uppercase; letter-spacing: 1px; }
+.checkbox-label { display: flex; align-items: center; gap: 10px; margin-bottom: 0.8rem; cursor: pointer; font-size: 0.95rem; }
+.checkbox-label input { width: 16px; height: 16px; accent-color: #1A237E; }
+.sort-select { width: 100%; padding: 10px; border-radius: 6px; border: 1px solid #ccc; font-family: 'Poppins', sans-serif; }
+.product-grid-area { flex-grow: 1; }
 
-.filters-sidebar h3 {
-  font-family: 'Cinzel', serif;
-  border-bottom: 2px solid #eee;
-  padding-bottom: 0.5rem;
-  margin-bottom: 1.5rem;
+.auth-container {
+  max-width: 400px; margin: 4rem auto; padding: 2rem; background: #fff;
+  border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.08); border: 1px solid #eee; text-align: center;
 }
+.auth-title { font-family: 'Cinzel', serif; font-size: 2rem; color: #1A237E; margin-bottom: 0.5rem; }
+.auth-form { display: flex; flex-direction: column; gap: 1.2rem; margin-top: 1.5rem; }
+.form-group { text-align: left; }
+.form-group label { display: block; font-size: 0.9rem; font-weight: 600; margin-bottom: 0.4rem; color: #555; }
+.form-input { width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 6px; font-size: 1rem; transition: border 0.3s; }
+.form-input:focus { border-color: #1A237E; outline: none; }
+.auth-footer { margin-top: 1.5rem; font-size: 0.9rem; color: #666; }
+.auth-link { color: #1A237E; font-weight: 600; text-decoration: underline; }
 
-.filter-group {
-  margin-bottom: 2rem;
-}
-
-.filter-group h4 {
-  margin-bottom: 0.8rem;
-  font-size: 0.95rem;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-}
-
-.checkbox-label {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  margin-bottom: 0.8rem;
-  cursor: pointer;
-  font-size: 0.95rem;
-}
-
-.checkbox-label input {
-  width: 16px;
-  height: 16px;
-  accent-color: #1A237E;
-}
-
-.sort-select {
-  width: 100%;
-  padding: 10px;
-  border-radius: 6px;
-  border: 1px solid #ccc;
-  font-family: 'Poppins', sans-serif;
-}
-
-/* Product Grid Area */
-.product-grid-area {
-  flex-grow: 1;
-}
-
-/* New/Discount Badges */
-.discount-badge {
-  position: absolute;
-  top: 10px;
-  left: 10px;
-  background: #d32f2f;
-  color: white;
-  padding: 4px 8px;
-  font-size: 0.75rem;
-  font-weight: bold;
-  border-radius: 4px;
-}
-
-.new-badge {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  background: #1A237E;
-  color: white;
-  padding: 4px 8px;
-  font-size: 0.75rem;
-  font-weight: bold;
-  border-radius: 4px;
-}
-
-/* Responsive Mall */
+/* --- 9. RESPONSIVE FIXES (MEDIA QUERIES) --- */
 @media (max-width: 900px) {
-  .mall-layout {
+  /* Header */
+  header { flex-direction: column; gap: 1rem; }
+  
+  /* Hero Section */
+  .hero {
     flex-direction: column;
+    text-align: center;
+    padding: 6rem 1.5rem; /* FIX: Reduced side padding */
+    gap: 3rem;
   }
-  .filters-sidebar {
-    width: 100%;
-  }
+  .hero-text { padding: 0; margin-bottom: 2rem; }
+  .hero-text h1 { font-size: 2.5rem; line-height: 1.2; } /* FIX: Smaller font */
+  .hero-text p { max-width: 100%; }
+  
+  /* Hero Buttons: Centering for Mobile */
+  .hero-buttons { justify-content: center; width: 100%; }
+
+  .hero-img img { height: 300px; }
+
+  /* Story Section */
+  .story-section { padding: 4rem 1.5rem; } /* FIX: Prevents text cut-off */
+
+  /* Faith Sections */
+  .faith-section { flex-direction: column !important; height: auto; min-height: auto; text-align: center; }
+  .faith-image-container { width: 100%; height: 250px; }
+  .faith-content { width: 100%; padding: 2.5rem 1.5rem; align-items: center; }
+  .faith-desc { max-width: 100%; }
+  
+  /* Mall */
+  .mall-layout { flex-direction: column; }
+  .filters-sidebar { width: 100%; }
+}
+
+@media (max-width: 768px) {
+  .product-grid { grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 1.5rem; }
+  .fact-section { padding: 3rem 1.5rem; }
+  .fact-section h2 { font-size: 2rem; }
+  .fact-box p { font-size: 1.1rem; }
 }

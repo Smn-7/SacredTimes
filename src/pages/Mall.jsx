@@ -1,12 +1,13 @@
 import { useState, useEffect, useMemo } from 'react';
-import { useSearchParams } from 'react-router-dom';
+import { Link, useSearchParams } from 'react-router-dom';
 import { allProducts, faiths } from '../data';
+import { useCart } from '../context/CartContext'; // UPDATED: Import the hook
 
 export default function Mall() {
   const [searchParams] = useSearchParams();
+  const { addToCart } = useCart(); // UPDATED: Get the add function
 
-  // 1. Initialize State Lazily (Reads URL immediately on first render)
-  // This prevents the need for an initial useEffect just to set this
+  // 1. Initialize State Lazily
   const [selectedFaiths, setSelectedFaiths] = useState(() => {
     const faithParam = searchParams.get('faith');
     return faithParam ? [faithParam] : [];
@@ -14,30 +15,26 @@ export default function Mall() {
 
   const [sortOption, setSortOption] = useState('newest');
 
-  // 2. LISTEN FOR URL CHANGES (Navigation Updates)
-  // If the user hits "Back" or navigates here, sync the state.
+  // 2. Sync with URL changes
   useEffect(() => {
     const faithParam = searchParams.get('faith');
     if (faithParam) {
-      // Only set state if it's different to avoid loops
       setSelectedFaiths((prev) => 
         prev.includes(faithParam) ? prev : [faithParam]
       );
     }
   }, [searchParams]);
 
-  // 3. DERIVED STATE (Replaces the problematic useEffect)
-  // We calculate 'filteredProducts' on the fly. useMemo ensures it only
-  // recalculates when dependencies change.
+  // 3. Filter & Sort Logic (Memoized)
   const filteredProducts = useMemo(() => {
     let result = [...allProducts];
 
-    // Filter by Faith
+    // Filter
     if (selectedFaiths.length > 0) {
       result = result.filter(p => selectedFaiths.includes(p.faithId));
     }
 
-    // Sort Logic
+    // Sort
     if (sortOption === 'price-low') {
       result.sort((a, b) => a.price - b.price);
     } else if (sortOption === 'price-high') {
@@ -51,7 +48,7 @@ export default function Mall() {
     }
 
     return result;
-  }, [selectedFaiths, sortOption]); // Dependencies
+  }, [selectedFaiths, sortOption]);
 
   // --- HANDLERS ---
   const toggleFaith = (faithId) => {
@@ -116,7 +113,9 @@ export default function Mall() {
           <div className="product-grid">
             {filteredProducts.map(product => (
               <div key={product.id} className="product-card">
-                <div className="product-img-wrapper">
+                
+                {/* Link to Product Detail Page (Image) */}
+                <Link to={`/product/${product.id}`} className="product-img-wrapper">
                   <img src={product.image} alt={product.name} />
                   {product.discount > 0 && (
                     <span className="discount-badge">-{product.discount}%</span>
@@ -124,16 +123,27 @@ export default function Mall() {
                   {product.isNew && (
                     <span className="new-badge">New</span>
                   )}
-                </div>
+                </Link>
+
                 <div className="product-content">
                   <div className="product-info">
-                    <h3>{product.name}</h3>
+                    {/* Link to Product Detail Page (Title) */}
+                    <Link to={`/product/${product.id}`}>
+                        <h3>{product.name}</h3>
+                    </Link>
+                    
                     <div style={{ display: 'flex', justifyContent: 'space-between' }}>
                         <span className="price">${product.price}</span>
                         <span style={{ color: '#FFD700' }}>★ {product.rating}</span>
                     </div>
                   </div>
-                  <button className="btn btn-dark" style={{ marginTop: 'auto', width: '100%' }}>
+                  
+                  {/* UPDATED: Add to Cart Button */}
+                  <button 
+                    className="btn btn-dark" 
+                    style={{ marginTop: 'auto', width: '100%' }}
+                    onClick={() => addToCart(product)} // Triggers the context action
+                  >
                     Add to Cart
                   </button>
                 </div>

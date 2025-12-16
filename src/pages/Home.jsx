@@ -12,10 +12,29 @@ export default function Home() {
             We are custodians of ancient crafts and sacred threads that bind
             generations together. Explore our curated marketplace where every thread tells a story.
           </p>
-          {/* Note: React Router uses 'to' instead of 'href' */}
-          <Link to="/mall" className="btn btn-primary">
-            Explore Collections
-          </Link>
+          
+          {/* UPDATED: Added 'hero-buttons' class for mobile centering */}
+          <div className="hero-buttons" style={{ 
+            display: 'flex', 
+            gap: '1rem', 
+            marginTop: '2rem', 
+            flexWrap: 'wrap'
+          }}>
+            <Link to="/mall" className="btn btn-primary">
+              Explore Collections
+            </Link>
+            
+            <Link to="/signup" className="btn" style={{ 
+                background: 'transparent', 
+                border: '2px solid #222', 
+                color: '#222',
+                fontWeight: '600',
+                whiteSpace: 'nowrap'
+            }}>
+              Join Community
+            </Link>
+          </div>
+
         </div>
         <div className="hero-img">
           <img

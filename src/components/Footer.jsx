@@ -1,16 +1,12 @@
 import React from 'react';
-import { useLocation } from 'react-router-dom'; // CHANGED: Replaces next/router
+import { useLocation } from 'react-router-dom'; 
 import { faiths } from '../data';
 
 export default function Footer() {
-  // CHANGED: Use 'useLocation' hook instead of 'useRouter'
   const location = useLocation();
 
-  // 1. Detect current faith based on the URL path
-  // location.pathname gives us the current URL (e.g., "/shop/hindu")
   const activeFaith = faiths.find(f => location.pathname.includes(`/shop/${f.id}`));
   
-  // 2. Set Dynamic Color
   const footerColor = activeFaith ? activeFaith.color : '#1A237E';
 
   return (

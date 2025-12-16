@@ -2,7 +2,7 @@ import { useParams, Link } from 'react-router-dom';
 import { faiths } from '../data';
 
 export default function FaithPage() {
-  const { faith } = useParams(); // Gets the :faith part of the URL
+  const { faith } = useParams(); 
 
   const pageData = faiths.find((f) => f.id === faith);
 
